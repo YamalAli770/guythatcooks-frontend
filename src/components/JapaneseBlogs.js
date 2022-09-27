@@ -17,14 +17,16 @@ const JapaneseBlogs = () => {
   }, [blogs])
   return (
     <main className="japanese-blogs">
-        <h3 className="japanese-blogs-header">Japanese</h3>
+        <div className="japanese-blogs-header">
+          <h3>Japanese</h3>
+          <Link className='view-all' to="/blogs/japanese">
+            <p>View All</p>
+            <FaArrowRight />
+          </Link>
+        </div>
         <div className="japanese-blogs-container">
           { filteredBlogs.map((blog) => (<Link key={blog._id} to={`/blog/${blog._id}`}><JapaneseBlog  blog={blog} /></Link>))}
         </div>
-        <Link className='view-all' to="/blogs/japanese">
-          <p>View All</p>
-          <FaArrowRight />
-        </Link>
     </main>
   )
 }

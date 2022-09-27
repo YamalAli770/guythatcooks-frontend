@@ -1,5 +1,6 @@
 import React from 'react'
 import { useContext } from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
 import { BlogContext } from '../context/BlogContext';
 
@@ -18,7 +19,7 @@ const Popular = () => {
             </h1>
             <Link to={`/blog/${blogs[0]._id}`}>
                 <div className="featured-blogs-left-image">
-                  <img src={`/images/${blogs[0].img}`} alt="" />
+                  <LazyLoadImage src={`/images/${blogs[0].img}`} alt={blogs[0].title} />
                 </div>
                 <span className="featured-blogs-left-date">
                   {new Date(blogs[0].createdAt).toDateString()}
@@ -26,17 +27,17 @@ const Popular = () => {
                 <h2 className="featured-blogs-left-title">
                   {blogs[0].title}
                 </h2>
-              </Link>
               <p className="featured-blogs-left-desc">
                 {blogs[0].desc}
               </p>
+            </Link>
           </div>
           <div className="featured-blogs-right">
             { blogArray.map((blog) => (
               <Link key={blog._id} to={`/blog/${blog._id}`}>
                 <section>
                   <div className="featured-blogs-right-image">
-                    <img src={`/images/${blog.img}`} alt={blog.title} />
+                    <LazyLoadImage src={`/images/${blog.img}`} alt={blog.title} />
                   </div>
                   <div className="featured-blogs-right-text">
                     <span className="featured-blogs-right-date">

@@ -1,10 +1,11 @@
 import React from 'react'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 const JapaneseBlog = ({ blog }) => {
   return (
     <main className="japanese-blog">
         <div className="japanese-blog-image">
-            <img src={`/images/${blog.img}`} alt={blog.title} />
+            <LazyLoadImage src={`/images/${blog.img}`} alt={blog.title} />
         </div>
         <span className="japanese-blog-date">{new Date(blog.createdAt).toDateString()}</span>
         <h2 className="japanese-blog-title">

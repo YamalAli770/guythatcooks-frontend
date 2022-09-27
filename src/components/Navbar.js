@@ -1,27 +1,32 @@
-import React, { useContext } from 'react'
-import { UserContext } from '../context/Context'
-import { FaUser } from 'react-icons/fa'
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react'
+import { UserContext } from '../context/UserContext'
+import { FaBars, FaUser } from 'react-icons/fa'
+import { GrClose } from 'react-icons/gr';
+import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 const axios = require('axios');
 
 const Navbar = () => {
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
   const { user, dispatch } = useContext(UserContext);
   const handleLogout = async () => {
     try {
         const res = await axios.get('/auth/logout');
         if(res.status === 204) {
             dispatch({ type: 'LOGOUT_USER' });
-            console.log(res);
             localStorage.clear();
+            navigate('/');
             toast.success('User Successfully Logged Out', {
                 position: "top-right",
                 draggable: false,
                 pauseOnHover: false,
                 autoClose: 2000
             });
+            handleToggle();
         }
     } catch (error) {
+        handleToggle();
         toast.error('Cannot Logout User', {
             position: "top-right",
             draggable: false,
@@ -31,12 +36,18 @@ const Navbar = () => {
     }
     
   }
+
+  const handleToggle = () => {
+    setOpen(false);      
+  }
+  
   return (
     <>
         <main className="navbar-container">
             <div className="navbar-left">
-                <Link to="/">
-                    <h1 className='navbar-left-header'>Blog..</h1>
+                <Link to="/" className='nav-logo'>
+                    <span className='logo-top'>guy</span>
+                    <span className='logo-bottom'>that cooks</span>
                 </Link>
             </div>
             <div className="navbar-center">
@@ -50,12 +61,24 @@ const Navbar = () => {
             </div>
             <div className="navbar-right">
                 <nav>
-                    {user ? <p>{user.username}</p> : 
+                    {user ? <Link to="/me">{user.username}</Link> : 
                         <Link to='/register'>
                             <p>Register</p>
                             <FaUser />
                         </Link>
                     }
+                </nav>
+            </div>
+            { open ? <GrClose className='close-hamburger' onClick={(e) => setOpen(false)} /> : <FaBars className='open-hamburger' onClick={(e) => setOpen(true)} />}
+            <div className={`hamburger-container ${open ? 'show-hamburger' : 'hide-hamburger'}`}>
+                <nav className="hamburger-nav">
+                    <Link onClick={handleToggle} to="/">Home</Link>
+                    <Link onClick={handleToggle} to="/about">About</Link>
+                    { user?.isAdmin && <Link onClick={handleToggle} to="/create">Create</Link>}
+                    <Link onClick={handleToggle} to="/contact">Contact Us</Link>
+                    { !user && <Link onClick={handleToggle} to="/register" className='hamburger-nav-register'>Register</Link>}
+                    {user && <button onClick={handleLogout} className='navbar-center-logout hamburger-nav-logout'>Logout</button>}
+                    { user && <Link onClick={handleToggle} to="/me" className='hamburger-nav-user'> <FaUser /> {user.username}</Link>}
                 </nav>
             </div>
         </main>    

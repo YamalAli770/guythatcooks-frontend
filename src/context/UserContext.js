@@ -1,5 +1,5 @@
 import React, { useReducer, createContext, useEffect } from 'react';
-import { Reducer } from './Reducer';
+import { UserReducer } from './UserReducer';
 
 const INITIAL_STATE = {
     user: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null,
@@ -10,18 +10,19 @@ const INITIAL_STATE = {
 export const UserContext = createContext(INITIAL_STATE);
 
 export const UserContextProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(Reducer, 
+    const [state, dispatch] = useReducer(UserReducer, 
     INITIAL_STATE);
 
     useEffect(() => {
         if(state.user) {
-            const { username, email, profilePic, isAdmin, accessToken } = state.user;
+            const { username, email, profilePic, accessToken, favourites, _id } = state.user;
             const fetchedUser = {
+            _id,
             username,
             email,
             profilePic,
-            isAdmin,
-            accessToken
+            accessToken,
+            favourites
             }
             localStorage.setItem("user", JSON.stringify(fetchedUser)); 
         }

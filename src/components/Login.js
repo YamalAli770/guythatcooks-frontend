@@ -1,18 +1,22 @@
 import React from 'react'
 import { useContext } from 'react'
 import { useState } from 'react'
-import { FaAt, FaEye } from 'react-icons/fa'
-import { Link, useNavigate } from 'react-router-dom'
-import { UserContext } from '../context/Context'
+import { FaAt, FaEye, FaEyeSlash } from 'react-icons/fa'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { UserContext } from '../context/UserContext'
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios'
 import showPassword from '../helper/showPassword'
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
   const { dispatch } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passVisible, setPassVisible] = useState(false);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     dispatch({ type: 'LOGIN_START'});
@@ -20,12 +24,12 @@ const Login = () => {
         const res = await axios.post('/auth/login', {
             email,
             password
-        })
+        }, { withCredentials: true })
         if(res.data) {
             setEmail('');
             setPassword('');
             dispatch({ type: 'LOGIN_SUCCESS', payload: res.data })
-            navigate('/');
+            navigate(from, { replace: true });
         }
     } catch (error) {
         dispatch({ type: 'LOGIN_FAILURE' });
@@ -52,7 +56,7 @@ const Login = () => {
                 <label htmlFor="password">Password</label>
                 <div className="login-input-container">
                     <input type="password" name="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                    <FaEye className='eye-icon' onClick={(e) => showPassword(e)} />
+                    {passVisible ? <FaEyeSlash onClick={(e) => showPassword(e, setPassVisible)} className='eye-icon' /> : <FaEye onClick={(e) => showPassword(e, setPassVisible)} className='eye-icon' />}
                 </div>
             </section>
             <ToastContainer />

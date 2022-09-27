@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React from 'react'
 import { useState } from 'react'
-import { FaAt, FaEye, FaUser } from 'react-icons/fa'
+import { FaAt, FaEye, FaEyeSlash, FaUser } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import showPassword from '../helper/showPassword'
@@ -10,6 +10,8 @@ const Register = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passVisible, setPassVisible] = useState(false);
+  
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
@@ -63,7 +65,7 @@ const Register = () => {
                 <label htmlFor="password">Password</label>
                 <div className="register-input-container">
                     <input type="password" name="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                    <FaEye onClick={(e) => showPassword(e)} className='eye-icon' />
+                    {passVisible ? <FaEyeSlash onClick={(e) => showPassword(e, setPassVisible)} className='eye-icon' /> : <FaEye onClick={(e) => showPassword(e, setPassVisible)} className='eye-icon' />}
                 </div>
             </section>
             <ToastContainer />

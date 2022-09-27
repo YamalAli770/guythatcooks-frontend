@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react'
 import { useContext } from 'react';
 import { useState } from 'react'
-import { UserContext } from '../context/Context';
+import { UserContext } from '../context/UserContext';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { BlogContext } from '../context/BlogContext';
