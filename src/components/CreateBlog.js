@@ -31,13 +31,13 @@ const CreateBlog = () => {
         data.append("image", img);
         newBlog.img = img.name;
         try {
-            await axios.post('/upload', data)
+            await axios.post('https://guythatcooks-backend-production.up.railway.app/api/upload', data)
         } catch (error) {
             console.log(error);
         }
     }
     try {
-        const res = await axios.post('/blogs', newBlog, {
+        const res = await axios.post('https://guythatcooks-backend-production.up.railway.app/api/blogs', newBlog, {
             headers: {
                 'Authorization': 'Bearer ' + user.accessToken
             }

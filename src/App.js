@@ -33,7 +33,7 @@ function App() {
     const fetchBlogs = async () => {
       dispatch({ type: "FETCH_START" });
       try {
-        const res = await axios.get('/blogs');
+        const res = await axios.get('https://guythatcooks-backend-production.up.railway.app/api/blogs');
         if (res.data) {
           dispatch({ type: "FETCH_SUCCESS", payload: res.data });
         }
