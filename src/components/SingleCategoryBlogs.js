@@ -9,7 +9,6 @@ const SingleCategoryBlogs = () => {
     const { blogs } = useContext(BlogContext);
     const { category } = useParams();
     const capCategory = (category.replace(category[0], category[0].toUpperCase()));
-    console.log(capCategory);
     let filteredBlogs;
     if(blogs) {
         filteredBlogs = blogs.filter((blog) => blog.category === capCategory);

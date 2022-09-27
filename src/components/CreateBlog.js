@@ -33,7 +33,12 @@ const CreateBlog = () => {
         try {
             await axios.post('https://guythatcooks-backend-production.up.railway.app/api/upload', data)
         } catch (error) {
-            console.log(error);
+            toast.error(error.response.data.message, {
+                position: "top-right",
+                draggable: false,
+                pauseOnHover: false,
+                autoClose: 2000
+            })
         }
     }
     try {

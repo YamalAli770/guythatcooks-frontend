@@ -30,10 +30,8 @@ const Register = () => {
                 pauseOnHover: false,
                 autoClose: 2000
             })
-            console.log(res.data);
         }
     } catch (error) {
-        console.log(error.response.data.message);
         toast.error(error.response.data.message, {
             position: "top-right",
             draggable: false,
