@@ -62,43 +62,43 @@ function App() {
             </>
           } />
           <Route exact path="/blogs/:category" element={
-            <Suspense fallback={<InfinitySpin color="#05445E" />}>
+            <Suspense fallback={<div className="infinity-loader"><InfinitySpin color="#05445E" /></div> }>
               <SingleCategoryBlogs />
             </Suspense>
           } />
           <Route exact path="/blog/:id" element={
-            <Suspense fallback={<InfinitySpin color="#05445E" />}>
+            <Suspense fallback={<div className="infinity-loader"><InfinitySpin color="#05445E" /></div> }>
               <BlogSpecific />
             </Suspense>} />
           <Route element={<ProtectedRoutes />}>
             <Route exact path="/create" element={user && user.isAdmin ?
-              <Suspense fallback={<InfinitySpin color="#05445E" />}>
+              <Suspense fallback={<div className="infinity-loader"><InfinitySpin color="#05445E" /></div> }>
                 <CreateBlog />
               </Suspense>
               : <Navigate to="/" />} />
             <Route exact path='/me' element={
-              <Suspense fallback={<InfinitySpin color="#05445E" />}>
+              <Suspense fallback={<div className="infinity-loader"><InfinitySpin color="#05445E" /></div> }>
                 <Profile />
               </Suspense>
             } />
           </Route>
           <Route exact path="/register" element={user ? <Navigate to="/" /> : 
-            <Suspense fallback={<InfinitySpin color="#05445E" />}>
+            <Suspense fallback={<div className="infinity-loader"><InfinitySpin color="#05445E" /></div> }>
               <Register />
             </Suspense>
           } />
           <Route exact path="/login" element={user ? <Navigate to="/" /> : 
-            <Suspense fallback={<InfinitySpin color="#05445E" />}>
+            <Suspense fallback={<div className="infinity-loader"><InfinitySpin color="#05445E" /></div> }>
               <Login />
             </Suspense>
           } />
           <Route exact path='/search' element={
-            <Suspense fallback={<InfinitySpin color="#05445E" />}>
+            <Suspense fallback={<div className="infinity-loader"><InfinitySpin color="#05445E" /></div> }>
               <SearchedCategory />
             </Suspense>
           } />
           <Route path='*' element={
-            <Suspense fallback={<InfinitySpin color="#05445E" />}>
+            <Suspense fallback={<div className="infinity-loader"><InfinitySpin color="#05445E" /></div> }>
               <NotFound />
             </Suspense>
           } />

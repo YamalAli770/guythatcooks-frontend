@@ -1315,6 +1315,11 @@ blockquote p::after {
     font-family: var(--secondary-font);
 }
 
+.infinity-loader {
+    text-align: center;
+    height: 14.3rem;
+}
+
 @media(min-width: 992px) {
     .hamburger-container {
         display: none;
