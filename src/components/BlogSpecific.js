@@ -134,7 +134,7 @@ const BlogSpecific = () => {
 
   const handleFavourite = async () => {
     try {
-        const result = await axios.put(`/user/favourite/${user._id}?blog=${id}`, null, {
+        const result = await axios.put(`https://guythatcooks-backend-production.up.railway.app/api/user/favourite/${user._id}?blog=${id}`, null, {
             headers: {
                 'Authorization': 'Bearer ' + user.accessToken,
             }
