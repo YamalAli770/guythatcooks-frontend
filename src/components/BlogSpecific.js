@@ -42,7 +42,7 @@ const BlogSpecific = () => {
   const handleBlogDelete = async (e) => {
     e.preventDefault();
     try {
-        const res = await axios.delete(`/blogs/${id}`, {
+        const res = await axios.delete(`https://guy-that-cooks-backend.onrender.com/blogs/${id}`, {
             headers: {
                 'Authorization': 'Bearer ' + user.accessToken
             }
@@ -90,7 +90,7 @@ const BlogSpecific = () => {
         })
     } else {
         try {
-            const res = await axios.put(`/blogs/${id}`, {title, category, desc, markdown}, {
+            const res = await axios.put(`https://guy-that-cooks-backend.onrender.com/blogs/${id}`, {title, category, desc, markdown}, {
                 headers: {
                     'Authorization': 'Bearer ' + user.accessToken
                 }
@@ -134,7 +134,7 @@ const BlogSpecific = () => {
 
   const handleFavourite = async () => {
     try {
-        const result = await axios.put(`https://guythatcooks-backend-production.up.railway.app/api/user/favourite/${user._id}?blog=${id}`, null, {
+        const result = await axios.put(`https://guy-that-cooks-backend.onrender.com/api/user/favourite/${user._id}?blog=${id}`, null, {
             headers: {
                 'Authorization': 'Bearer ' + user.accessToken,
             }

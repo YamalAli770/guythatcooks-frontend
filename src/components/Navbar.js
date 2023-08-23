@@ -12,7 +12,7 @@ const Navbar = () => {
   const { user, dispatch } = useContext(UserContext);
   const handleLogout = async () => {
     try {
-        const res = await axios.get('https://guythatcooks-backend-production.up.railway.app/api/auth/logout');
+        const res = await axios.get('https://guy-that-cooks-backend.onrender.com/api/auth/logout');
         if(res.status === 204) {
             dispatch({ type: 'LOGOUT_USER' });
             localStorage.clear();

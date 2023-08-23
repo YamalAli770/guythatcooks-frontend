@@ -21,7 +21,7 @@ const Login = () => {
     e.preventDefault();
     dispatch({ type: 'LOGIN_START'});
     try {
-        const res = await axios.post('https://guythatcooks-backend-production.up.railway.app/api/auth/login', {
+        const res = await axios.post('https://guy-that-cooks-backend.onrender.com/api/auth/login', {
             email,
             password
         }, { withCredentials: true })

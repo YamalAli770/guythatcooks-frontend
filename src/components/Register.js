@@ -15,7 +15,7 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-        const res = await axios.post('https://guythatcooks-backend-production.up.railway.app/api/auth/register', {
+        const res = await axios.post('https://guy-that-cooks-backend.onrender.com/api/auth/register', {
             username,
             email,
             password
